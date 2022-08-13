@@ -67,7 +67,9 @@ router.post('/cleanDatabase', function(req, res, next) {
       res.status(500);
       res.json({error: "Error cleaning database."})
       throw error;
-    }
+    } else 
+      res.status(200);
+      res.send("Database empty.")
   });
 })
 
