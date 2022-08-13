@@ -13,6 +13,7 @@
 <script>
 	import { user } from '../../../stores/index';
 	export let type;
+  export let handleSubmit
 	/**
 * @type {string}
 */
@@ -23,7 +24,8 @@
 		textButton = 'Sign Up';
 	}
 	function validate() {
-		console.log($user.name);
+		console.log($user.username);
+    handleSubmit()
 	}
 </script>
 
@@ -39,7 +41,7 @@
 						Username
 					</label>
 					<input
-						bind:value="{$user.name}"
+						bind:value="{$user.username}"
 						class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 						id="username"
 						type="text"
