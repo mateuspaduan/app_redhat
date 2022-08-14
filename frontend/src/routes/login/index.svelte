@@ -14,6 +14,7 @@
         }else{
             lastError = "something went wrong with sign in"
             console.log(lastError)
+            console.warn(lastError)
 
         }
 	}
