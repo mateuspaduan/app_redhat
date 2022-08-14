@@ -52,8 +52,8 @@ router.post('/register', function(req, res, next) {
         res.json({error: "Error creating user."})
         throw error;
       } else {
-        res.send("User created successfully");
-        res.json({ received: true })
+        console.log("User added to the database.")
+        res.json({ received: true });
       }
     });
   }
