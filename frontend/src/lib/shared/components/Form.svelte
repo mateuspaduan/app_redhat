@@ -13,11 +13,11 @@
 <script>
 	import { user } from '../../../stores/index';
 	export let type;
-  export let handleSubmit;
-  export let lastError;
+	export let handleSubmit;
+	export let lastError;
 	/**
-* @type {string}
-*/
+	 * @type {string}
+	 */
 	let textButton;
 	if (type === 'login') {
 		textButton = 'Sign In';
@@ -26,7 +26,7 @@
 	}
 	function validate() {
 		console.log($user.username);
-    handleSubmit()
+		handleSubmit();
 	}
 </script>
 
@@ -53,16 +53,24 @@
 					<label class="block text-gray-700 text-sm font-bold mb-2" for="password">
 						Password
 					</label>
-					<input
-						bind:value="{$user.password}"
-						class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-						id="password"
-						type="password"
-						placeholder="******************"
-					/>
-          {#if lastError!==""}
-          <p class="text-red-500 text-xs italic">{lastError}</p>
-          {/if}
+					{#if lastError !== ''}
+						<input
+							bind:value="{$user.password}"
+							class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+							id="password"
+							type="password"
+							placeholder="******************"
+						/>
+						<p class="text-red-500 text-xs italic">{lastError}</p>
+					{:else}
+						<input
+							bind:value="{$user.password}"
+							class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+							id="password"
+							type="password"
+							placeholder="******************"
+						/>
+					{/if}
 				</div>
 				<div class="flex items-center justify-between">
 					<button
@@ -71,7 +79,7 @@
 					>
 						{textButton}
 					</button>
-					{#if type=="login"}
+					{#if type == 'login'}
 						<a
 							class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
 							href="#"
