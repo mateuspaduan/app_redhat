@@ -13,7 +13,8 @@
 <script>
 	import { user } from '../../../stores/index';
 	export let type;
-  export let handleSubmit
+  export let handleSubmit;
+  export let lastError;
 	/**
 * @type {string}
 */
@@ -59,7 +60,9 @@
 						type="password"
 						placeholder="******************"
 					/>
-					<p class="text-red-500 text-xs italic">Please choose a password.</p>
+          {#if lastError!==""}
+          <p class="text-red-500 text-xs italic">{lastError}</p>
+          {/if}
 				</div>
 				<div class="flex items-center justify-between">
 					<button
