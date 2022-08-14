@@ -20,7 +20,6 @@
 		});
 	};
 </script>
-
 {#if useThemeModeButton}
 	<button
 		on:click="{() => toggleTheme()}"
