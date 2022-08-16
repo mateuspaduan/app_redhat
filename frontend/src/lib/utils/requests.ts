@@ -1,4 +1,13 @@
-const serverUrl = "http://127.0.0.1:4000"
+let serverUrl = "http://127.0.0.1:4000"
+
+console.log("Loading server url from .env")
+console.log(import.meta.env)
+
+if(import.meta.env.SERVER_URL){
+    serverUrl = import.meta.SVELTEKIT_STARTER_SERVER_URL
+}
+
+console.log("Server URL: "+serverUrl)
 
 async function doPost(payload: Object, endpoint: String) {
     console.log(`Doing a post to ${serverUrl}${endpoint}`)
