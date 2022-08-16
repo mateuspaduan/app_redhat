@@ -15,11 +15,22 @@
 	.chat {
 		height: 100%;
 		display: grid;
-		grid-template-rows: 12fr 1fr;
+		grid-template-rows: 1fr 10fr 1fr;
+	}
+	.chatHeader{
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		justify-content: end;
+		align-items: center;
+	}
+
+	.icon{
+		height: 32px;
 	}
 </style>
 
 <script>
+	import FaRegUserCircle from 'svelte-icons/fa/FaRegUserCircle.svelte'
 	import { goto } from '$app/navigation';
 	import { user, chat } from '../../stores/index';
 	import { onMount, afterUpdate, tick } from 'svelte';
@@ -53,15 +64,23 @@
 	const scrollToBottom = async (node) => {
 		node.scroll({ top: node.scrollHeight, behavior: 'smooth' });
 	};
+
+	
 </script>
 
 <div class="chat">
+	<div class="chatHeader bg-gray-900 ">
+		<div class="icon text-white">
+			<FaRegUserCircle ></FaRegUserCircle>
+		</div>
+		<p class="text-white underline tracking-wide font-bold text-2xl text-center">{$user.username}</p>
+	</div>
 	<div class="mainChat" bind:this="{chatDiv}">
 		{#each $chat.messages as { username, text }}
 			<Message username="{username}" message="{text}" />
 		{/each}
 	</div>
-	<div class="footerChat">
+	<div class="footerChat bg-gray-900">
 		<input
 			bind:value="{$chat.currentMessage}"
 			class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
