@@ -26,6 +26,7 @@
 
 	.icon{
 		height: 32px;
+		display: flex;
 	}
 </style>
 
@@ -35,7 +36,7 @@
 	import { user, chat } from '../../stores/index';
 	import { onMount, afterUpdate, tick } from 'svelte';
 	import Message from './message.svelte';
-
+	import FaArrowAltCircleLeft from 'svelte-icons/fa/FaArrowAltCircleLeft.svelte'
 	let chatDiv;
 	onMount(async () => {
 		if ($user.authenticated) {
@@ -71,6 +72,7 @@
 <div class="chat">
 	<div class="chatHeader bg-gray-900 ">
 		<div class="icon text-white">
+			<FaArrowAltCircleLeft></FaArrowAltCircleLeft>
 			<FaRegUserCircle ></FaRegUserCircle>
 		</div>
 		<p class="text-white underline tracking-wide font-bold text-2xl text-center">{$user.username}</p>
@@ -80,8 +82,11 @@
 			<Message username="{username}" message="{text}" />
 		{/each}
 	</div>
+	<form on:submit|preventDefault={() => sendMessage}>
+
 	<div class="footerChat bg-gray-900">
-		<input
+		
+			<input
 			bind:value="{$chat.currentMessage}"
 			class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
 			id="inline-full-name"
@@ -95,4 +100,6 @@
 			Send
 		</button>
 	</div>
+	<form></form>
+
 </div>
