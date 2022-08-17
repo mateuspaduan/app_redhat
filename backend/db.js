@@ -1,11 +1,12 @@
-const { builtinModules } = require('module');
 var mysql = require('mysql2');
+require('dotenv').config()
+
 var mysqlConn = mysql.createConnection({
-    host: '9.30.13.55',
-    user: 'admin',
-    password: 'apppassword12345',
-    port: '13306',
-    database: 'app_db'
+    host:  process.env.MYSQL_URL,
+    user: process.env.MYSQL_USER || 'admin',
+    password: process.env.MYSQL_PASSWORD || 'apppassword12345',
+    port: process.env.MYSQL_PORT,
+    database: proces.env.MYSQL_DATABASE || 'app_db'
   });
   mysqlConn.connect();
 
