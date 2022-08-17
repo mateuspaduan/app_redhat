@@ -121,6 +121,9 @@
 		"node": ">= 14.16.1"
 	},
 	"dependencies": {
+		"fortawesome": "^0.0.1-security",
+		"svelte-fa": "^3.0.3",
+		"svelte-icons": "^2.1.0",
 		"svelte-use-form": "^2.0.0"
 	}
 }

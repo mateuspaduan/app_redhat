@@ -26,7 +26,7 @@ router.post('/login', function(req, res, next) {
         console.log(results[0].usersCount);
         if (results[0].usersCount == 1) {
           res.status(200);
-          res.send("User exists!");
+          res.json({ received: true });
         } else {
           res.status(401);
           res.json({error: "Unauthorized"});

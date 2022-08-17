@@ -29,20 +29,25 @@
 	// End: Local component methods
 </script>
 
-<div class="bg-white dark:bg-black min-w-full max-w-full min-h-full max-h-full">
+<div class="bg-white dark:bg-black main">
 	<!-- Start: Header Navigation -->
-	<Header on:toggleTheme="{(e) => toggleThemeMode(e)}" useThemeModeButton="{true}" />
 	<!-- End: Header Navigation -->
-	<main class="flex flex-col w-full bg-white dark:bg-black min-w-full min-h-full max-h-full">
+	<main>
 		<article
-			class="relative md:ml-64 flex flex-col justify-center items-start w-[calc(100vw - 15rem - 1rem)] p-0 h-auto m-0 px-4 overflow-y-auto"
 		>
 			<!-- Start: Defaull layout slot -->
 			<slot />
 			<!-- End: Defaull layout slot -->
 			<!-- Start: Footer -->
-			<Footer />
 			<!-- End: Footer -->
 		</article>
 	</main>
 </div>
+
+<style>
+	.main,article,main{
+		height: 100%;
+	
+	}
+
+</style>

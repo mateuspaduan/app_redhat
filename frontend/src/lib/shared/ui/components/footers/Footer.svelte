@@ -15,64 +15,37 @@
 			>
 			<a
 				sveltekit:prefetch
-				href="/about"
+				href="/login"
 				class="{linkClass}"
 				aria-label="{'Footer about link'}"
 			>
-				About
+				Login
 			</a>
 			<a
 				sveltekit:prefetch
-				href="/projects"
+				href="/signup"
 				class="{linkClass}"
 				aria-label="{'Footer about link'}"
 			>
-				Projects
+				Sign Up
 			</a>
 		</div>
 		<div class="flex flex-col space-y-4">
+			<a
+			sveltekit:prefetch
+			href="/chat"
+			class="{linkClass}"
+			aria-label="{'Footer about link'}"
+		>
+			Chat
+		</a>
 			<ExternalLink
 				href="https://www.linkedin.com/in/asnavneetsharma/"
 				cssClasses="{linkClass}"
 				ariaLabel="{'Footer LinkedIn link'}">LinkedIn</ExternalLink
 			>
-			<ExternalLink
-				href="https://github.com/navneetsharmaui"
-				cssClasses="{linkClass}"
-				ariaLabel="{'Footer GitHub link'}">GitHub</ExternalLink
-			>
-			<ExternalLink
-				href="https://twitter.com/asnavneetsharma"
-				cssClasses="{linkClass}"
-				ariaLabel="{'Footer Twitter link'}">Twitter</ExternalLink
-			>
-			<ExternalLink
-				href="https://www.instagram.com/asnavneetsharma/"
-				cssClasses="{linkClass}"
-				ariaLabel="{'Footer Instagram link'}">Instagram</ExternalLink
-			>
+			
 		</div>
-		<div class="flex flex-col space-y-4">
-			<a
-				sveltekit:prefetch
-				href="/users"
-				class="{linkClass}"
-				aria-label="{'Footer tags link'}">Users</a
-			>
-			<a
-				sveltekit:prefetch
-				href="/settings"
-				class="{linkClass}"
-				aria-label="{'Footer tags link'}">Settings</a
-			>
-			<a
-				sveltekit:prefetch
-				href="/dashboard"
-				class="{linkClass}"
-				aria-label="{'Footer dashobard link'}"
-			>
-				Dashboard
-			</a>
-		</div>
+	
 	</div>
 </footer>

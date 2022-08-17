@@ -7,9 +7,6 @@
 	let lastError = '';
 
 	async function handleOnSubmit() {
-		let foo = 'baz';
-		let bar = 'qux';
-		let result = null;
 		console.log('Handling submit on SignUp');
 
 		try {
@@ -23,7 +20,7 @@
 				$user.authenticated = true;
 				goto('/chat');
 			} else {
-				console.error(`Error: ${res.status} \n ${res.statusText}`);
+				console.error(`Error: ${res.status} \n`);
 				lastError = "something went wrong with sign up'";
 				console.log(lastError);
 				$user.password = '';
