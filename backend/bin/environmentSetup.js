@@ -6,10 +6,10 @@ if(!process.env.MYSQL_URL){
   console.log("Mongo URL: "+ process.env.MYSQL_URL)
 }
 
-if(!process.env.MONGO_URL){
+if(!process.env.MYSQL_PORT){
   throw("Can't find environment variable MYSQL_PORT")
 }else{
-  console.log("Mongo URL: "+ process.env.MYSQL_PORT)
+  console.log("Mongo PORT: "+ process.env.MYSQL_PORT)
 }
 
 
