@@ -28,10 +28,10 @@ const config = {
 	kit: {
 		adapter: vercelAdapter(options),
 		target: '#starter',
-		ssr: true,
+		ssr: false,
 		prerender: {
-			crawl: true,
-			enabled: true,
+			crawl: false,
+			enabled: false,
 			onError: 'fail',
 			pages: ['*'],
 		},
