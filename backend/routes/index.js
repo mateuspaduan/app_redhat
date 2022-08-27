@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mysqlConn = require('../db.js');
 
+const io = require("../bin/www")
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.send("hello world");

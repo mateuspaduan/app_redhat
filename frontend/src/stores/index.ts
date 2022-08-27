@@ -4,8 +4,8 @@ export const isDev = writable(process.env.NODE_ENV === 'development');
 
 export const user = writable({
     username: "lucas",
-    password: "",
-    authenticated: false,
+    password: "lucas",
+    authenticated: true,
   })
 
   export const chat = writable({

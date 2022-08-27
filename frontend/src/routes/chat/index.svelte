@@ -48,11 +48,19 @@
 			console.log('you can stay here');
 		} else {
 			console.log('you cant stay here');
-			//goto('/login', { replaceState: true });
+			goto('/login', { replaceState: true });
 		}
-		const socket = io(serverUrl);
+		const socket = io(serverUrl, {
+			auth: {
+				username: $user.username,
+			},
+		});
 		socket.on('connect', () => {
-			console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+			console.log(socket.id);
+		});
+
+		socket.on('new_user', (newuserUsername) => {
+			console.log(`New user ${newuserUsername} connected`); // x8WIv7-mJelg7on_ALbx
 		});
 
 		socket.on('disconnect', () => {
