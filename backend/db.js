@@ -6,10 +6,10 @@ require('dotenv').config()
  // port: '13306',
 
 var mysqlConn = mysql.createConnection({
-    host:  env.MYSQL_URL,
+    host:  env.MYSQL_URL || "localhost",
     user: env.MYSQL_USER || 'admin',
     password: env.MYSQL_PASSWORD || 'apppassword12345',
-    port: env.MYSQL_PORT,
+    port: env.MYSQL_PORT || "13306",
     database: env.MYSQL_DATABASE || 'app_db'
   });
   mysqlConn.connect();
