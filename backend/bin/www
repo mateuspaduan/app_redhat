@@ -44,7 +44,7 @@ io.on('connection', socket => {
       if(senderUser){
         console.log(`a user sent a new message, username: ${senderUser}`);
         console.log(`message: ${message}`)
-        io.emit("message",{username:senderUser, message:message})
+        io.emit("message",{username:senderUser, text:message})
       }else{
         console.warn("New socket without username, he cant send messages")
       }

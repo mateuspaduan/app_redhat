@@ -40,6 +40,7 @@
 	import FaArrowAltCircleLeft from 'svelte-icons/fa/FaArrowAltCircleLeft.svelte';
 	let chatDiv;
 	let serverUrl = 'http://localhost:4000';
+	let socket
 	if (import.meta.env.SERVER_URL) {
 		serverUrl = import.meta.SVELTEKIT_STARTER_SERVER_URL;
 	}
@@ -50,7 +51,7 @@
 			console.log('you cant stay here');
 			goto('/login', { replaceState: true });
 		}
-		const socket = io(serverUrl, {
+		socket = io(serverUrl, {
 			auth: {
 				username: $user.username,
 			},
@@ -66,6 +67,8 @@
 		socket.on('message', (messagePayload) => {
 			console.log("new message");
 			console.log(messagePayload)
+			$chat.messages.push({ username: messagePayload.username, text: messagePayload.text });
+			$chat.messages=$chat.messages //svelte update is triggered by assignments
 		});
 		socket.on('disconnect', () => {
 			console.log(socket.id); // undefined
@@ -73,8 +76,10 @@
 	});
 
 	async function sendMessage() {
-		$chat.messages.push({ username: $user.username, text: $chat.currentMessage });
+		socket.emit("message", {socketID:socket.id, message:$chat.currentMessage})
 		$chat.currentMessage = '';
+
+
 	}
 
 	afterUpdate(() => {
