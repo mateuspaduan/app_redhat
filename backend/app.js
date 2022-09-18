@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 var mysqlConn = require('./db.js');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -18,6 +19,7 @@ app.use(logger('dev'));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({origin: 'http://localhost:3000'}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

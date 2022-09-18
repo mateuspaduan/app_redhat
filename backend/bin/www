@@ -8,22 +8,59 @@ var app = require('../app');
 var debug = require('debug')('backend:server');
 var http = require('http');
 
+const { Server } = require("socket.io");
+const users = require("../users/index")
+
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '4000');
 app.set('port', port);
-
+console.log("Listening On " + port)
 /**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
+const io = new Server(server,{
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
+io.on('connection', socket => {
+  const newUserUsername = socket.handshake.auth ?  socket.handshake.auth.username  : false
+  if(newUserUsername){
+    console.log(`a user connected, username: ${newUserUsername}`);
+    socket.emit("new_user", newUserUsername)
+    users.addUser(socket.id, newUserUsername)
+    socket.on("message", ({socketID, message})=>{
+      console.log("New message received")
+      console.log(socketID)
+      const senderUser = users.getUserById(socketID)
+      console.log(senderUser)
+      if(senderUser){
+        console.log(`a user sent a new message, username: ${senderUser}`);
+        console.log(`message: ${message}`)
+        io.emit("message",{username:senderUser, text:message})
+      }else{
+        console.warn("New socket without username, he cant send messages")
+      }
+    })
+  }else{
+    console.warn("New socket without username, he shouldnt be here")
+  }
+
+});
+
 
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+
 
 server.listen(port);
 server.on('error', onError);
@@ -88,3 +125,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+module.exports = io
