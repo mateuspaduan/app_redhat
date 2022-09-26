@@ -23,34 +23,52 @@ console.log("Listening On " + port)
  */
 
 var server = http.createServer(app);
-const io = new Server(server,{
+const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"]
   }
 });
-
+let clients = {}
 io.on('connection', socket => {
-  const newUserUsername = socket.handshake.auth ?  socket.handshake.auth.username  : false
-  if(newUserUsername){
-    console.log(`a user connected, username: ${newUserUsername}`);
-    socket.emit("new_user", newUserUsername)
-    users.addUser(socket.id, newUserUsername)
-    socket.on("message", ({socketID, message})=>{
-      console.log("New message received")
-      console.log(socketID)
-      const senderUser = users.getUserById(socketID)
-      console.log(senderUser)
-      if(senderUser){
-        console.log(`a user sent a new message, username: ${senderUser}`);
-        console.log(`message: ${message}`)
-        io.emit("message",{username:senderUser, text:message})
-      }else{
-        console.warn("New socket without username, he cant send messages")
-      }
-    })
-  }else{
-    console.warn("New socket without username, he shouldnt be here")
+  try {
+    const newUserUsername = socket.handshake.auth ? socket.handshake.auth.username : false
+    clients[socket.id] = socket
+    if (newUserUsername) {
+      console.log(`a user connected, username: ${newUserUsername}`);
+      socket.emit("new_user", newUserUsername)
+      console.log(socket.id)
+      users.addUser(socket.id, newUserUsername)
+      socket.on("message", ({ socketID, message }) => {
+        console.log("New message received")
+        console.log(socketID)
+        const senderUser = users.getUserById(socketID)
+        console.log(senderUser)
+        if (senderUser) {
+          console.log(`a user sent a new message, username: ${senderUser.username}`);
+          console.log(`message: ${message}`)
+          io.emit("message", { username: senderUser.username, text: message })
+        } else {
+          console.warn("New socket without username, he cant send messages")
+          socket.disconnect()
+        }
+      })
+  
+      socket.on("disconnect", (reason) => {
+        console.log("Disconnect was triggered")
+        users.removeUser(newUserUsername)
+        delete clients[socket.id]
+        io.emit("message", { username: "server", text: `User ${newUserUsername} has left the chat` })
+  
+        // ...
+      });
+    } else {
+      console.warn("New socket without username, he shouldnt be here")
+    }
+  } catch (err) {
+    console.error(err)
+    socket.disconnect()
+
   }
 
 });

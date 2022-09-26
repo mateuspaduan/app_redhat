@@ -26,7 +26,7 @@ router.post('/login', function(req, res, next) {
         throw error;
       } else {
         console.log(results[0].usersCount);
-        if (results[0].usersCount == 1) {
+        if (results[0].usersCount > 1) {
           res.status(200);
           res.json({ received: true });
         } else {

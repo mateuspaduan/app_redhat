@@ -1,6 +1,6 @@
 class ChatUsers {
     constructor(){
-        this.users = {}
+        this.users = []
     }
     addUser(id, username){
         if(!id){
@@ -9,14 +9,27 @@ class ChatUsers {
         if(!username){
             throw("Can't create user without username")
         }
-        console.log(`New User ${username} created`)
-        this.users[id]=username
+        const alreadyExists = this.users.findIndex((userObject)=>userObject.username === username)
+        console.log(alreadyExists)
+        if(alreadyExists == -1){
+            console.log(`New User ${username} created`)
+            this.users.push({username:username, id:id})
+            console.log(this.users)
+        }else{
+            throw("Username already in chat")
+        }
+     
+    }
 
+    removeUser(username){
+        console.log(`removing user ${username} `)
+        this.users = this.users.filter(user=>user.username != username)
         console.log(this.users)
     }
 
     getUserById(id){
-        return this.users[id] ? this.users[id] : false
+        const UserIndex = this.users.findIndex((user)=>user.id==id)
+        return this.users[UserIndex]
     }
 }
 const users = new ChatUsers()
