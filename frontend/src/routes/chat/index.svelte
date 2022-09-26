@@ -61,7 +61,6 @@
 		});
 
 		socket.on('new_user', (newuserUsername) => {
-			socket.emit("message", {socketID:socket.id, message:"test"})
 			console.log(`New user ${newuserUsername} connected`); // x8WIv7-mJelg7on_ALbx
 		});
 		socket.on('message', (messagePayload) => {
